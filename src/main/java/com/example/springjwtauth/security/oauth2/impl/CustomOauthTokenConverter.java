@@ -1,4 +1,4 @@
-package com.example.springjwtauth.security.oauth2;
+package com.example.springjwtauth.security.oauth2.impl;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;

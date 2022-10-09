@@ -1,8 +1,7 @@
-package com.example.springjwtauth.service;
+package com.example.springjwtauth.security.oauth2;
 
 import com.example.springjwtauth.entity.User;
-import com.example.springjwtauth.security.oauth2.CustomOauth2UserDetails;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import com.example.springjwtauth.security.oauth2.impl.CustomOauth2UserDetails;
 
 public interface OauthService {
     User save(CustomOauth2UserDetails oAuth2User);

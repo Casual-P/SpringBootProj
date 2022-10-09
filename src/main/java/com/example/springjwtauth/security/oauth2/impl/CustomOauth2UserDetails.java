@@ -1,4 +1,4 @@
-package com.example.springjwtauth.security.oauth2;
+package com.example.springjwtauth.security.oauth2.impl;
 
 import lombok.Getter;
 import lombok.Setter;

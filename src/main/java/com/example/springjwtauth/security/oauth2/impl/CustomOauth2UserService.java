@@ -1,6 +1,8 @@
-package com.example.springjwtauth.security.oauth2;
+package com.example.springjwtauth.security.oauth2.impl;
 
-import com.example.springjwtauth.service.OauthService;
+import com.example.springjwtauth.exeption.CustomAccessDeniedException;
+import com.example.springjwtauth.exeption.CustomUserWasBannedException;
+import com.example.springjwtauth.security.oauth2.OauthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.convert.converter.Converter;
@@ -74,6 +76,9 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
         catch (NoSuchElementException ex) {
             oauthService.save(oAuth2User);
         }
+
+        if(oAuth2User.isBanned())
+            throw new CustomAccessDeniedException("User was disabled or banned");
 
         return oAuth2User;
     }

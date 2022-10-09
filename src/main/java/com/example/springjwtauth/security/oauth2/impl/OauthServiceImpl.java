@@ -1,10 +1,9 @@
-package com.example.springjwtauth.service.impl;
+package com.example.springjwtauth.security.oauth2.impl;
 
 import com.example.springjwtauth.entity.Role;
 import com.example.springjwtauth.entity.User;
 import com.example.springjwtauth.repository.UserRepository;
-import com.example.springjwtauth.security.oauth2.CustomOauth2UserDetails;
-import com.example.springjwtauth.service.OauthService;
+import com.example.springjwtauth.security.oauth2.OauthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

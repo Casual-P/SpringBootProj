@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
         <meta name="generator" content="Hugo 0.101.0">
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="css/signin.css" rel="stylesheet" type="text/css">
-        <link href="css/fontello.css" rel="stylesheet" type="text/css">
-        <title>Custom SignIn</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+        <link href="/css/signin.css" rel="stylesheet" type="text/css">
+        <link href="/css/fontello.css" rel="stylesheet" type="text/css">
+        <title>Login</title>
         <style>
             i {
                 font-size: 30px;
@@ -31,43 +31,50 @@
         <meta name="theme-color" content="#712cf9">
       
     </head>
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="/js/bootstrap.bundle.min.js"></script>
         <body class="text-center">
-            
             <main class="form-signin w-100 m-auto">
-                <form>
+                <form method="post" th:action="@{/api/view/login}">
                     <h3 class="h3 mb-3">
                         <strong>Please sign in</strong>
                     </h3>
-    
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                        <label for="floatingInput">Email address</label>
+                        <input type="text" class="form-control" name="username" id="floatingInput" placeholder="Username">
+                        <label for="floatingInput">Username</label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password">
                         <label for="floatingPassword">Password</label>
                     </div>
                     <div class="checkbox mb-3">
                         <label style="cursor:pointer">
-                            <input type="checkbox" value="remember-me" style="cursor:pointer"> Remember me
+                            <input type="checkbox" name="remember-me" style="cursor:pointer"> Remember me
                         </label>
+                    </div>
+                    <div th:if="${param.error}" class="alert alert-danger">
+                        Invalid Username or Password
+                    </div>
+                    <div th:if="${param.ban}" class="alert alert-danger">
+                        Your acc was disabled or banned
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success">
+                        Logout was Success
                     </div>
                     <button class="w-100 btn btn-lg btn-info mb-3" type="submit" >Sign in</button>
                 </form>
                 <div class="mb-3">
-                    <a class="oauth" href="#">
+                    <a class="oauth" href="/oauth2/authorization/google">
                         <i class="icon-google"></i>
                     </a>
-                    <a class="oauth" href="#">
+                    <a class="oauth" href="/oauth2/authorization/github">
                         <i class="icon-github-circled"></i>
                     </a>
-                    <a class="oauth" href="#">
-                        <i class="icon-facebook"></i>
+                    <a class="oauth" href="/oauth2/authorization/vk">
+                        <i class="icon-vkontakte"></i>
                     </a>
                 </div>
-                <h7>Don't have account?</h5>
-                <a href="/register.html" class="mb-3">Register</a>
+                <label>Don't have account?</label>
+                <a href="/api/view/register" class="mb-3">Register</a>
             </main>
         </body>
 </html>
