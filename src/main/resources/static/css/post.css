@@ -1,0 +1,70 @@
+/*input {*/
+/*    width: 250px;*/
+/*    height: 25px;*/
+/*    font-size: large;*/
+/*}*/
+
+/*#update_button {*/
+/*    width: 250px;*/
+/*    height: 40px;*/
+/*    font-size: large;*/
+/*    cursor: pointer;*/
+/*    background: cyan;*/
+/*    border: gold;*/
+/*}*/
+
+/*#person_link {*/
+/*    white-space: pre;*/
+/*}*/
+
+/*#update_button:hover {*/
+/*    background-color: cornflowerblue;*/
+/*}*/
+
+/*#delete_button {*/
+/*    width: 250px;*/
+/*    height: 40px;*/
+/*    font-size: large;*/
+/*    cursor: pointer;*/
+/*    background: orangered;*/
+/*    color: azure;*/
+/*    border: gold;*/
+/*}*/
+
+/*#delete_button:hover {*/
+/*    background-color: orange;*/
+/*}*/
+
+
+#comments {
+    width: 750px;
+    height: auto;
+    background-color: #ffffff;
+    border-width: 1px;
+    border-color: #ffffff;
+    border-style: solid;
+    border-radius: 5px;
+    margin: 10px auto;
+    padding: 5px 10px;
+}
+
+#main-body {
+    background: #eaeaea;
+}
+
+#comment-form {
+    padding: 0 0;
+    width: 750px;
+    height: auto;
+    margin: 10px auto 50px;
+}
+
+#input-container{
+    position: relative;
+    margin-bottom: 15px;
+}
+
+/*#send-btn {*/
+/*    size: 100px;*/
+/*    margin-left: 650px;*/
+/*}*/

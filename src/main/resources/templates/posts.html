@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/post.css" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comments</title>
+</head>
+
+<style>
+    .from-date {
+        display: inline;
+    }
+
+    #date {
+        float: right;
+        opacity: 0.5;
+    }
+
+    #from {
+        opacity: 0.9;
+    }
+</style>
+
+<body id="main-body">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <div th:include="navbar"></div>
+
+    <div th:each="comment : ${comments}" id="comments">
+        <p th:text="${comment.getFrom()}" class="from-date" id="from"/>
+        <p th:text="${#temporals.format(comment.getDate(), 'HH:mm:ss dd MMM yyyy')}" class="from-date" id="date"/>
+        <p th:text="${comment.getText()}" id="text"/>
+    </div>
+    <form class="row g-3" role="form" id="comment-form" th:method="put" th:action="@{/api/view/posts}" th:object="${comment}">
+        <div class="form-floating" style="padding: 0 0">
+            <textarea class="form-control" th:field="*{text}" id="floatingTextarea2" style="height: 150px"></textarea>
+            <label for="floatingTextarea2">Leave a comment here</label>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="padding: 0 0">
+            <button class="btn btn-primary col-3" type="submit">Send</button>
+        </div>
+    </form>
+</body>
+</html>

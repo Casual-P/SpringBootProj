@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" sec:authorize="isAnonymous()" th:href="@{/api/view/main}" style="font-size: 25px" >Project</a>
+        <a class="navbar-brand" sec:authorize="isAuthenticated()" sec:authentication="name" th:href="@{/api/view/authentication}" style="font-size: 25px" >Username</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item" >
+                    <a class="nav-link" aria-current="page" th:href="@{/api/view/main}" style="font-size: 20px">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="font-size: 20px">Links</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="font-size: 20px">Support</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/api/view/posts/0"  style="font-size: 20px">Comments</a>
+                </li>
+<!--                <li class="nav-item dropdown">-->
+<!--                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                        Dropdown-->
+<!--                    </a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a class="dropdown-item" href="#">Action</a></li>-->
+<!--                        <li><a class="dropdown-item" href="#">Another action</a></li>-->
+<!--                        <li><hr class="dropdown-divider"></li>-->
+<!--                        <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link disabled">Disabled</a>-->
+<!--                </li>-->
+            </ul>
+                <form class="mb-2" sec:authorize="isAnonymous()" th:action="@{/api/view/login}">
+                    <button class="btn btn-outline-primary" type="submit" style="margin-right: 10px">Login</button>
+                </form>
+                <form class="mb-2" sec:authorize="isAnonymous()" th:action="@{/api/view/register}" >
+                    <button class="btn btn-outline-success" type="submit" style="margin-right: 10px">Register</button>
+                </form>
+                <form class="mb-2" sec:authorize="isAuthenticated()" th:method="post" th:action="@{/api/view/logout}">
+                    <button class="btn btn-outline-primary" type="submit" style="margin-right: 10px">Logout</button>
+                </form>
+        </div>
+    </div>
+</nav>
+</body>
+</html>
