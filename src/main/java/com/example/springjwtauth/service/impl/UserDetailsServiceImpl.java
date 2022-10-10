@@ -1,8 +1,6 @@
 package com.example.springjwtauth.service.impl;
 
 import com.example.springjwtauth.entity.User;
-import com.example.springjwtauth.exeption.CustomAccessDeniedException;
-import com.example.springjwtauth.exeption.CustomAuthenticationException;
 import com.example.springjwtauth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

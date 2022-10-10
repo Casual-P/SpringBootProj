@@ -1,23 +1,22 @@
 package com.example.springjwtauth.entity;
 
 import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Document("posts")
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity(name = "Comments")
 public class Comment {
-    @MongoId
-    private String _id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String text;
     private LocalDateTime date;
-    private String from;
-    private String to;
+    private String from = "not specified";
+    private String to = "not specified";
 }

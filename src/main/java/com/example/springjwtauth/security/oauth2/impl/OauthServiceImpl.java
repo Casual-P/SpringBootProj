@@ -1,6 +1,6 @@
 package com.example.springjwtauth.security.oauth2.impl;
 
-import com.example.springjwtauth.entity.Role;
+import com.example.springjwtauth.component.Roles;
 import com.example.springjwtauth.entity.User;
 import com.example.springjwtauth.repository.UserRepository;
 import com.example.springjwtauth.security.oauth2.OauthService;
@@ -39,9 +39,9 @@ public class OauthServiceImpl implements OauthService {
         String provider = oAuth2User.getProvider();
         user.setUsername(name);
         user.setEmail(email);
-        user.setProvider(provider);
+        user.setAuth_provider(provider);
         user.setUserOauthId(oAuth2User.getUserOauthId());
-        user.setRoles(Collections.singleton(Role.USER));
+        user.setRoles(Collections.singleton(Roles.USER));
         return user;
     }
 

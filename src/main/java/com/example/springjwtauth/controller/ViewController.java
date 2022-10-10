@@ -14,13 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Controller
 @RequiredArgsConstructor
@@ -62,7 +57,7 @@ public class ViewController {
     }
 
     @PutMapping("/register")
-    public RedirectView registerUser(@ModelAttribute UserDto userDto, BindingResult bindingResult) throws Exception{
+    public RedirectView registerUser(@ModelAttribute UserDto userDto){
         log.info("{}", userDto.toString());
         try {
             userService.saveUser(userDto);
@@ -81,7 +76,7 @@ public class ViewController {
     }
 
     @PutMapping("/posts")
-    public RedirectView savePost(@ModelAttribute CommentDto commentDto, Authentication authentication, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public RedirectView savePost(@ModelAttribute CommentDto commentDto, Authentication authentication) {
         log.info("{}", commentDto.toString());
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("http://localhost/api/view/posts/0");

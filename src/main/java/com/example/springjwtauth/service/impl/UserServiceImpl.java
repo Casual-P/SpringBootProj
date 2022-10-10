@@ -1,19 +1,15 @@
 package com.example.springjwtauth.service.impl;
 
+import com.example.springjwtauth.component.Roles;
 import com.example.springjwtauth.dto.UserDto;
-import com.example.springjwtauth.entity.Role;
 import com.example.springjwtauth.entity.User;
 import com.example.springjwtauth.exeption.UserAlreadyExistException;
 import com.example.springjwtauth.mapper.UserMapper;
 import com.example.springjwtauth.repository.UserRepository;
 import com.example.springjwtauth.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -39,7 +35,7 @@ public class UserServiceImpl implements UserService {
         } catch (NoSuchElementException e) {
             User user = userMapper.userDtoToUser(userDto);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setRoles(Collections.singleton(Role.USER));
+            user.setRoles(Collections.singleton(Roles.USER));
             userRepository.save(user);
             return userMapper.userToUserDto(user);
         }
@@ -56,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto deleteUserById(String id) {
+    public UserDto deleteUserById(Long id) {
         return userMapper.userToUserDto(userRepository.findById(id).orElseThrow());
     }
 
@@ -71,17 +67,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserById(String id) {
+    public UserDto getUserById(Long id) {
         return userMapper.userToUserDto(userRepository.findById(id).orElseThrow());
     }
 
     @Override
     public UserDto updateUser(UserDto userDto) {
         User updatedUser = userMapper.userDtoToUser(userDto);
-        User currentUser = userRepository.findById(updatedUser.get_id()).orElseThrow();
+        User currentUser = userRepository.findById(updatedUser.getId()).orElseThrow();
         if(!updatedUser.getPassword().equals(currentUser.getPassword()))
             updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
-        updatedUser.set_id(currentUser.get_id());
+        updatedUser.setId(currentUser.getId());
         return userMapper.userToUserDto(userRepository.save(updatedUser));
     }
 

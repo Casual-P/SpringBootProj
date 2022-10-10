@@ -14,11 +14,11 @@ public interface PostService {
 
     List<CommentDto> deleteAllPostsByUser(User user);
 
-    CommentDto deletePostById(String id);
+    CommentDto deletePostById(Long id);
 
     Page<CommentDto> getPostsByDateTimeAfter(LocalDateTime localDateTime, PageRequest pageRequest);
 
-    CommentDto getPostById(String id);
+    CommentDto getPostById(Long id);
 
     CommentDto updatePost(CommentDto commentDto);
 

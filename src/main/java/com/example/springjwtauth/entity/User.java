@@ -1,26 +1,35 @@
 package com.example.springjwtauth.entity;
 
+import com.example.springjwtauth.component.Roles;
 import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.FieldType;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import javax.persistence.*;
 import java.util.Set;
 
-@Document(collection = "people")
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Getter
 @Setter
+@Entity(name = "people")
 public class User {
-    @MongoId(FieldType.OBJECT_ID)
-    private String _id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String username;
     private String password;
+    @Column(unique = true, nullable = false)
     private String email;
-    private Set<Role> roles;
+    @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
+    @CollectionTable(joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Roles> roles;
     private boolean isBanned;
-    private String provider;
+    @Column(name = "oauth_provider")
+    private String auth_provider;
+    @Column(unique = true)
     private String userOauthId;
 }
+
+
+

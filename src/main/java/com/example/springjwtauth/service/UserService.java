@@ -16,13 +16,13 @@ public interface UserService {
 
     UserDto deleteUserByEmail(String email);
 
-    UserDto deleteUserById(String id);
+    UserDto deleteUserById(Long id);
 
     UserDto getUserByUsername(String username);
 
     UserDto getUserByEmail(String eMail);
 
-    UserDto getUserById(String id);
+    UserDto getUserById(Long id);
 
     UserDto updateUser(UserDto userDto);
 

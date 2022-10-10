@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 public class CommentDto {
-    private String _id;
+    private Long id;
     @NotBlank
     @NotNull
     @Size(min = 1, max = 355)
