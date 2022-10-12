@@ -15,8 +15,16 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<?> handleAbstract(NoSuchElementException ex) {
+    public ResponseEntity<?> handleNotFound(NoSuchElementException ex) {
         log.info("{}", ex.getMessage());
         return new ResponseEntity<>("Element not found", HttpStatus.NOT_FOUND);
+    }
+
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<?> handleIllegalArg(IllegalArgumentException ex) {
+        log.info("{}", ex.getMessage());
+        return new ResponseEntity<>("Bad request parameter", HttpStatus.BAD_REQUEST);
     }
 }

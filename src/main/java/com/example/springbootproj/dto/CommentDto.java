@@ -19,7 +19,10 @@ public class CommentDto {
     @Size(min = 1, max = 355)
     private String text;
     private LocalDateTime date;
-    private String from;
-    private String to;
+    private UserDto fromUser;
+    private UserDto toUser;
 
+    public String getFromUsername() {
+        return fromUser == null? "anonymous" : fromUser.getUsername();
+    }
 }

@@ -1,0 +1,108 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="create-tables" author="Casual_P">
+        <createTable tableName="users">
+            <column name="id" type="bigserial">
+                <constraints nullable="false"  primaryKey="true"/>
+            </column>
+            <column name="username" type="varchar">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar" defaultValue="not specified">
+            </column>
+            <column name="email" type="varchar">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="is_banned" type="boolean" defaultValueBoolean="false">
+            </column>
+            <column name="oauth_provider" type="varchar" defaultValue="not specified">
+            </column>
+            <column name="user_oauth_id" type="varchar" defaultValue="not specified">
+            </column>
+        </createTable>
+
+        <createTable tableName="roles">
+            <column name="id" type="varchar">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="user_role">
+            <column name="user_id" type="bigint">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_user_id"
+                             references="users(id)"/>
+            </column>
+            <column name="role_id" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_role_id"
+                             references="roles(id)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="comments">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="text" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="from_user_id" type="bigint">
+                <constraints foreignKeyName="fk_from_user_id"
+                             references="users(id)"/>
+            </column>
+            <column name="to_user_id" type="bigint">
+                <constraints foreignKeyName="fk_to_user_id"
+                             references="users(id)"/>
+            </column>
+        </createTable>
+
+        <insert tableName="roles">
+            <column name="id">USER</column>
+        </insert>
+
+        <insert tableName="roles">
+            <column name="id">ADMIN</column>
+        </insert>
+
+        <insert tableName="roles">
+            <column name="id">BANNED</column>
+        </insert>
+
+        <insert tableName="users">
+            <column name="email">admin@admin.com</column>
+            <column name="username">admin</column>
+            <column name="password">$2y$10$nlaO0.g7QKANKUQQyyufYO0xyxltUalX9TX/OL8kB3GRT2OzDBaJS</column>
+        </insert>
+
+        <insert tableName="users">
+            <column name="username">banned</column>
+            <column name="password">$2y$10$4MO.TqAsFli.DVxjj0IZW.EGpE/ndhUNj7W3aR3w2ZkrhqvcMcCaK</column>
+            <column name="email">ban@ban.ban</column>
+            <column name="is_banned">true</column>
+        </insert>
+
+        <insert tableName="user_role">
+            <column name="user_id">1</column>
+            <column name="role_id">USER</column>
+        </insert>
+
+        <insert tableName="user_role">
+            <column name="user_id">1</column>
+            <column name="role_id">ADMIN</column>
+        </insert>
+
+        <insert tableName="user_role">
+            <column name="user_id">2</column>
+            <column name="role_id">BANNED</column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

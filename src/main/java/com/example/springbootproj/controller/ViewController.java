@@ -57,6 +57,7 @@ public class ViewController {
     }
 
     @PutMapping("/register")
+    @ResponseStatus(HttpStatus.SEE_OTHER)
     public RedirectView registerUser(@ModelAttribute UserDto userDto){
         log.info("{}", userDto.toString());
         try {
@@ -72,15 +73,18 @@ public class ViewController {
     @GetMapping("/authentication")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> authorization(Authentication authentication) {
+        log.info("{}", authentication.toString());
         return ResponseEntity.ok(authentication);
     }
 
     @PutMapping("/posts")
+    @ResponseStatus(HttpStatus.SEE_OTHER)
     public RedirectView savePost(@ModelAttribute CommentDto commentDto, Authentication authentication) {
         log.info("{}", commentDto.toString());
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("http://localhost/api/view/posts/0");
-        commentDto.setFrom(authentication.getName());
+        UserDto curUser = userService.getAuthenticatedUser(authentication);
+        commentDto.setFromUser(curUser);
         postService.savePost(commentDto);
         return redirectView;
     }

@@ -1,6 +1,7 @@
 package com.example.springbootproj.security.oauth2.impl;
 
 import com.example.springbootproj.component.Roles;
+import com.example.springbootproj.entity.Role;
 import com.example.springbootproj.entity.User;
 import com.example.springbootproj.repository.UserRepository;
 import com.example.springbootproj.security.oauth2.OauthService;
@@ -35,13 +36,13 @@ public class OauthServiceImpl implements OauthService {
     private User convert(CustomOauth2UserDetails oAuth2User) {
         User user = new User();
         String email = oAuth2User.getEmail();
-        String name = oAuth2User.getAttribute("name");
+        String name = oAuth2User.getName();
         String provider = oAuth2User.getProvider();
         user.setUsername(name);
         user.setEmail(email);
         user.setAuth_provider(provider);
         user.setUserOauthId(oAuth2User.getUserOauthId());
-        user.setRoles(Collections.singleton(Roles.USER));
+        user.setRoles(Collections.singleton(new Role(Roles.USER)));
         return user;
     }
 

@@ -17,6 +17,12 @@ public class Comment {
     private Long id;
     private String text;
     private LocalDateTime date;
-    private String from = "not specified";
-    private String to = "not specified";
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "from_user_id")
+    @ToString.Exclude
+    private User fromUser;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "to_user_id")
+    @ToString.Exclude
+    private User toUser;
 }

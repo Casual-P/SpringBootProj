@@ -30,7 +30,7 @@
     <div th:include="navbar"></div>
 
     <div th:each="comment : ${comments}" id="comments">
-        <p th:text="${comment.getFrom()}" class="from-date" id="from"/>
+        <p th:text="${comment.getFromUsername()}" class="from-date" id="from"/>
         <p th:text="${#temporals.format(comment.getDate(), 'HH:mm:ss dd MMM yyyy')}" class="from-date" id="date"/>
         <p th:text="${comment.getText()}" id="text"/>
     </div>

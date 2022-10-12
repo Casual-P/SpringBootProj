@@ -1,6 +1,8 @@
 package com.example.springbootproj.dto;
 
 import com.example.springbootproj.component.Roles;
+import com.example.springbootproj.entity.Comment;
+import com.example.springbootproj.entity.Role;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
@@ -9,6 +11,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Set;
 
 
@@ -30,8 +33,9 @@ public class UserDto {
     @Email
     private String email;
     @NotNull
-    private Set<Roles> roles;
+    private Set<Role> roles;
     private Boolean isBanned;
     private String auth_provider;
     private String userOauthId;
+    private List<Comment> comments;
 }

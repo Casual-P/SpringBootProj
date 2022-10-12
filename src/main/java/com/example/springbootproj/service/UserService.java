@@ -2,6 +2,7 @@ package com.example.springbootproj.service;
 
 import com.example.springbootproj.dto.UserDto;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface UserService {
     UserDto updateUser(UserDto userDto);
 
     List<UserDto> getPageableUsers(Pageable pageable);
+
+    UserDto getAuthenticatedUser(Authentication authentication);
 }

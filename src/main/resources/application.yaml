@@ -1,0 +1,77 @@
+server:
+  port: 80
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/siteDB
+    username: postgres
+    password: 123
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: false
+        default_schema: custom_schema
+        generate_statistics: false
+        use_sql_comments: true
+  liquibase:
+    enabled: true
+    liquibase-schema: custom_schema
+    change-log: liquibase/changelog-master.xml
+    user: postgres
+    password: 123
+    url: jdbc:postgresql://postgres:5432/siteDB
+    default-schema: custom_schema
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 882813035099-9i53qg1dprg3dh4hl5dknchebjlqpebb.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - profile
+              - email
+          github:
+            client-id: f095cbf9af71c48b73b1
+            client-secret: 0d1cb8ffec8c09ecc001dd07a6c9c5ffdb846304
+            scope:
+              - user
+          vk:
+            client-id: 51426465
+            client-secret: r9VSLs5jNvZhM8sXK00q
+            redirect-uri: http://localhost/login/oauth2/code/vk
+            client-authentication-method: post
+            authorization-grant-type: authorization_code
+            scope:
+              - email
+        provider:
+          vk:
+            authorization-uri: https://oauth.vk.com/authorize?revoke=1
+            token-uri: https://oauth.vk.com/access_token
+            user-info-uri: https://api.vk.com/method/users.get?v=5.131&fields=email
+            user-name-attribute: first_name
+          google:
+            user-name-attribute: name
+          github:
+            user-name-attribute: login
+springdoc:
+  swagger-ui:
+    path: /api/view/swagger
+  api-docs:
+    path: /api/docs/swagger
+mine-prop:
+  jwt:
+    header: Authorization
+    expTime: 1000000
+    secret: $2y$10$2P6q89byrQjRCBvceUkb.OZG7/1zA2AaphmaekAGpsYm41p8TGJSW
+
+logging:
+  level:
+    root: info

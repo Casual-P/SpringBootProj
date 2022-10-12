@@ -95,6 +95,9 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
             oauth2UserDetails.setUserOauthId(oauth2UserDetails.getAttribute("id").toString());
         }
         oauth2UserDetails.setEmail(oauth2UserDetails.getAttribute("email"));
+        if (userRequest.getClientRegistration().getRegistrationId().equals("github")) {
+            oauth2UserDetails.setEmail(oauth2UserDetails.getUserOauthId() + "@notAccessible");
+        }
         return oauth2UserDetails;
     }
 

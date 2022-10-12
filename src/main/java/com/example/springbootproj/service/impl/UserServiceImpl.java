@@ -2,14 +2,20 @@ package com.example.springbootproj.service.impl;
 
 import com.example.springbootproj.component.Roles;
 import com.example.springbootproj.dto.UserDto;
+import com.example.springbootproj.entity.Role;
 import com.example.springbootproj.entity.User;
 import com.example.springbootproj.exeption.UserAlreadyExistException;
 import com.example.springbootproj.mapper.UserMapper;
 import com.example.springbootproj.repository.UserRepository;
+import com.example.springbootproj.security.CustomUserDetails;
+import com.example.springbootproj.security.oauth2.impl.CustomOauth2UserDetails;
 import com.example.springbootproj.service.UserService;
+import io.jsonwebtoken.lang.Assert;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -35,7 +41,7 @@ public class UserServiceImpl implements UserService {
         } catch (NoSuchElementException e) {
             User user = userMapper.userDtoToUser(userDto);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setRoles(Collections.singleton(Roles.USER));
+            user.setRoles(Collections.singleton(new Role(Roles.USER)));
             userRepository.save(user);
             return userMapper.userToUserDto(user);
         }
@@ -88,5 +94,21 @@ public class UserServiceImpl implements UserService {
                 .stream()
                 .map(userMapper::userToUserDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public UserDto getAuthenticatedUser(Authentication authentication) {
+        Assert.notNull(authentication, "Authentication has wrong type or null");
+        User user;
+        Object principal = authentication.getPrincipal();
+        if (principal instanceof CustomOauth2UserDetails) {
+            user = userRepository.findByUserOauthId(((CustomOauth2UserDetails) principal).getUserOauthId()).orElseThrow(() -> new IllegalStateException("OAuth2 user has wrong provider id"));
+        }else if (principal instanceof CustomUserDetails) {
+            user = userRepository.findById(((CustomUserDetails) principal).getUserId()).orElseThrow(() -> new IllegalStateException("User has wrong id"));
+        }
+        else {
+            throw new IllegalArgumentException("Authentication has wrong type.");
+        }
+        return userMapper.userToUserDto(user);
     }
 }

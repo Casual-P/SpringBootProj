@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
@@ -26,15 +28,16 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public CommentDto savePost(CommentDto commentDto) {
-        commentDto.setDate(LocalDateTime.now());
+        commentDto.setToUser(null);
         Comment comment = mapper.postDtoToPost(commentDto);
         comment.setDate(LocalDateTime.now());
-        return mapper.postToPostDto(postRepository.save(comment));
+        postRepository.save(comment);
+        return mapper.postToPostDto(comment);
     }
 
     @Override
     public List<CommentDto> deleteAllPostsByUser(User user) {
-        return postRepository.deleteAllByFrom(user).stream().map(mapper::postToPostDto).collect(Collectors.toList());
+        return postRepository.deleteAllByFromUser(user).stream().map(mapper::postToPostDto).collect(Collectors.toList());
     }
 
     @Override

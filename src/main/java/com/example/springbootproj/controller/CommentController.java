@@ -5,7 +5,7 @@ import com.example.springbootproj.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +18,7 @@ public class CommentController {
     private final PostService postService;
 
     @PutMapping("/new")
-    public CommentDto createOne(@RequestBody CommentDto commentDto, Authentication authentication) {
-        commentDto.setFrom(authentication.getName());
+    public CommentDto createOne(@RequestBody CommentDto commentDto) {
         return postService.savePost(commentDto);
     }
 

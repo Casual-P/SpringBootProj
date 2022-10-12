@@ -83,7 +83,7 @@ public class SecurityConfig {
                 .formLogin()
                 .loginPage("/api/view/login")
                 .permitAll()
-                .defaultSuccessUrl("/api/view/main", false)
+                .defaultSuccessUrl("/api/view/main", true)
                 .failureUrl("/api/view/login?error")
                 .permitAll()
                 .and()
