@@ -36,7 +36,8 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
     private final RestTemplate restTemplate;
 
 
-    private final Converter<OAuth2UserRequest, RequestEntity<?>> requestEntityConverter = new OAuth2UserRequestEntityConverter();
+    private final Converter<OAuth2UserRequest, RequestEntity<?>> requestEntityConverter
+            = new OAuth2UserRequestEntityConverter();
 
     private final OauthService oauthService;
 

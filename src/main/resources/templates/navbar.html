@@ -19,7 +19,7 @@
                     <a class="nav-link" aria-current="page" th:href="@{/api/view/main}" style="font-size: 20px">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="font-size: 20px">Links</a>
+                    <a class="nav-link" th:href="@{/api/view/about}" style="font-size: 20px">Links</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="font-size: 20px">Support</a>
@@ -42,13 +42,13 @@
 <!--                    <a class="nav-link disabled">Disabled</a>-->
 <!--                </li>-->
             </ul>
-                <form class="mb-2" sec:authorize="isAnonymous()" th:action="@{/api/view/login}">
+                <form class="mb-2" sec:authorize="isAnonymous()" th:action="@{/api/auth/login}">
                     <button class="btn btn-outline-primary" type="submit" style="margin-right: 10px">Login</button>
                 </form>
-                <form class="mb-2" sec:authorize="isAnonymous()" th:action="@{/api/view/register}" >
+                <form class="mb-2" sec:authorize="isAnonymous()" th:action="@{/api/auth/register}" >
                     <button class="btn btn-outline-success" type="submit" style="margin-right: 10px">Register</button>
                 </form>
-                <form class="mb-2" sec:authorize="isAuthenticated()" th:method="post" th:action="@{/api/view/logout}">
+                <form class="mb-2" sec:authorize="isAuthenticated()" th:method="post" th:action="@{/api/auth/logout}">
                     <button class="btn btn-outline-primary" type="submit" style="margin-right: 10px">Logout</button>
                 </form>
         </div>

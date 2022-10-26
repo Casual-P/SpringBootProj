@@ -43,33 +43,6 @@ public class ViewController {
         return "main";
     }
 
-    @GetMapping("/login")
-    @ResponseStatus(HttpStatus.OK)
-    public String login() {
-        return "login";
-    }
-
-    @GetMapping("/register")
-    @ResponseStatus(HttpStatus.OK)
-    public String registerForm(Model model) {
-        model.addAttribute("user", new UserDto());
-        return "register";
-    }
-
-    @PutMapping("/register")
-    @ResponseStatus(HttpStatus.SEE_OTHER)
-    public RedirectView registerUser(@ModelAttribute UserDto userDto){
-        log.info("{}", userDto.toString());
-        try {
-            userService.saveUser(userDto);
-            log.info("{}", "Saved new user");
-        } catch (UserAlreadyExistException ex) {
-            log.info("{}", "Request user already exists");
-            return new RedirectView("http://localhost/api/view/register?error");
-        }
-        return new RedirectView("http://localhost/api/view/login");
-    }
-
     @GetMapping("/authentication")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> authorization(Authentication authentication) {
@@ -87,5 +60,11 @@ public class ViewController {
         commentDto.setFromUser(curUser);
         postService.savePost(commentDto);
         return redirectView;
+    }
+
+    @GetMapping("/about")
+    @ResponseStatus(HttpStatus.OK)
+    public String getLinks() {
+        return "about";
     }
 }

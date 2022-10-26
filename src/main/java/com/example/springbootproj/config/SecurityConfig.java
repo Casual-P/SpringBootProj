@@ -44,15 +44,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
-//        UserDetails userDetails = User.builder().username("admin").password("$2y$10$LzOhtsWn1hbcBaqWXzsNaOQQE0gUE1XivphL5eDbCg5S0U2FbDN9m").roles("ADMIN").build();
-//        inMemoryUserDetailsManager.createUser(userDetails);
-//        return inMemoryUserDetailsManager;
-//    }
-
-
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
@@ -70,7 +61,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .oauth2Login()
-                .loginPage("/api/view/login")
+                .loginPage("/api/auth/login")
                 .permitAll()
                 .userInfoEndpoint()
                 .userService(oauth2UserService)
@@ -81,10 +72,10 @@ public class SecurityConfig {
                 .defaultSuccessUrl("/api/view/main", true)
                 .and()
                 .formLogin()
-                .loginPage("/api/view/login")
+                .loginPage("/api/auth/login")
                 .permitAll()
                 .defaultSuccessUrl("/api/view/main", true)
-                .failureUrl("/api/view/login?error")
+                .failureUrl("/api/auth/login?error")
                 .permitAll()
                 .and()
                 .rememberMe()
@@ -92,16 +83,19 @@ public class SecurityConfig {
                 .and()
                 .logout()
                 .permitAll()
-                .logoutUrl("/api/view/logout")
+                .logoutUrl("/api/auth/logout")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/view/main", "/api/view/register", "/css/**", "/js/**", "/images/**", "/font/**", "/oauth2/**")
+                .antMatchers("/api/view/main", "/api/view/about",
+                        "/css/**", "/js/**", "/images/**", "/font/**",
+                        "/oauth2/**", "/api/auth/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .build();
     }
+
 
     @Bean
     public OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> accessTokenResponseClient(){
@@ -116,4 +110,14 @@ public class SecurityConfig {
         accessTokenResponseClient.setRestOperations(restTemplate);
         return accessTokenResponseClient;
     }
+
+    //    @Bean
+//    public UserDetailsService userDetailsService() {
+//        InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
+//        UserDetails userDetails = User.builder().username("admin").password("$2y$10$LzOhtsWn1hbcBaqWXzsNaOQQE0gUE1XivphL5eDbCg5S0U2FbDN9m").roles("ADMIN").build();
+//        inMemoryUserDetailsManager.createUser(userDetails);
+//        return inMemoryUserDetailsManager;
+//    }
 }
+
+

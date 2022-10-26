@@ -34,7 +34,7 @@ xmlns:th="http://www.thymeleaf.org" lang="en">
         <script src="/js/bootstrap.bundle.min.js"></script>
         <body class="text-center">
             <main class="form-signin w-100 m-auto">
-                <form method="post" th:action="@{/api/view/login}">
+                <form method="post" th:action="@{/api/auth/login}">
                     <h3 class="h3 mb-3">
                         <strong>Please sign in</strong>
                     </h3>
@@ -74,7 +74,7 @@ xmlns:th="http://www.thymeleaf.org" lang="en">
                     </a>
                 </div>
                 <label>Don't have account?</label>
-                <a href="/api/view/register" class="mb-3">Register</a>
+                <a th:href="@{/api/auth/register}" class="mb-3">Register</a>
             </main>
         </body>
 </html>

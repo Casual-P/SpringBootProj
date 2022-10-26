@@ -1,0 +1,48 @@
+package com.example.springbootproj.controller;
+
+import com.example.springbootproj.dto.UserDto;
+import com.example.springbootproj.exeption.UserAlreadyExistException;
+import com.example.springbootproj.service.PostService;
+import com.example.springbootproj.service.UserService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
+
+@Controller
+@RequestMapping("/api/auth")
+@RequiredArgsConstructor
+@Slf4j
+public class AuthController {
+    private final UserService userService;
+
+    @PutMapping("/register")
+    @ResponseStatus(HttpStatus.SEE_OTHER)
+    public RedirectView registerUser(@ModelAttribute UserDto userDto){
+        log.info("{}", userDto.toString());
+        try {
+            userService.saveUser(userDto);
+            log.info("{}", "Saved new user");
+        } catch (UserAlreadyExistException ex) {
+            log.info("{}", "Request user already exists");
+            return new RedirectView("http://localhost/api/auth/register?error");
+        }
+        return new RedirectView("http://localhost/api/auth/login");
+    }
+
+    @GetMapping("/login")
+    @ResponseStatus(HttpStatus.OK)
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/register")
+    @ResponseStatus(HttpStatus.OK)
+    public String registerForm(Model model) {
+        model.addAttribute("user", new UserDto());
+        return "register";
+    }
+}

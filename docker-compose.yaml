@@ -2,16 +2,32 @@ version: '3'
 
 services:
   postgres:
-    image: postgres:14
+    image: postgres:14-alpine
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/create_schema.sql
+      - .:/var/lib/postgresql/data
     container_name: spring-app-postgres-14
+    restart: always
     environment:
       - 'POSTGRES_USER=postgres'
       - 'POSTGRES_PASSWORD=123'
       - 'POSTGRES_DB=siteDB'
+      - 'PGDATA=/var/lib/postgresql/data/pgdata'
   spring-app:
     build: ./
     container_name: 'spring-app'
+    depends_on:
+      - postgres
+#      - keycloak
     ports:
       - "80:80"
+#  keycloak:
+#    image: keycloak/keycloak:latest
+#    environment:
+#      - 'KEYCLOAK_ADMIN=admin'
+#      - 'KEYCLOAK_ADMIN_PASSWORD=admin'
+#      - 'DB_VENDOR=postgres'
+#      - 'DB_ADDR=postgres'
+#    command: ["start-dev", "--http-port=8443"]
+#    ports:
+#      - "8443:8443"
