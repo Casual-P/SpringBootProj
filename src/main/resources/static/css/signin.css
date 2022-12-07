@@ -8,7 +8,7 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #f8f7f1;
+    background: #eaeaea;
 }
 
 .form-signin {
@@ -38,7 +38,7 @@ body {
           -2px -1.5px lightblue,
           -2px   -1px lightblue,
           -2px -0.5px lightblue,
-          -2px    0px lightblue,
+          -2px    0 lightblue,
           -2px  0.5px lightblue,
           -2px    1px lightblue,
           -2px  1.5px lightblue,
@@ -46,7 +46,7 @@ body {
           -1.5px  2px lightblue,
           -1px    2px lightblue,
           -0.5px  2px lightblue,
-          0px     2px lightblue,
+          0 2px lightblue,
           0.5px   2px lightblue,
           1px     2px lightblue,
           1.5px   2px lightblue,
@@ -54,7 +54,7 @@ body {
           2px   1.5px lightblue,
           2px     1px lightblue,
           2px   0.5px lightblue,
-          2px     0px lightblue,
+          2px     0 lightblue,
           2px  -0.5px lightblue,
           2px    -1px lightblue,
           2px  -1.5px lightblue,
@@ -62,7 +62,7 @@ body {
           1.5px  -2px lightblue,
           1px    -2px lightblue,
           0.5px  -2px lightblue,
-          0px    -2px lightblue,
+          0 -2px lightblue,
           -0.5px -2px lightblue,
           -1px   -2px lightblue,
           -1.5px -2px lightblue;

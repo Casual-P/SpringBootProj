@@ -4,58 +4,57 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>About</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-          rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-          crossorigin="anonymous">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/about.css}">
 </head>
 <body>
 <div th:include="navbar"></div>
-<main>
-    <div class="container py-4">
-        <div class="p-5 mb-4 bg-light rounded-3">
-            <div class="container-fluid py-5">
-                <h1 class="display-5 fw-bold">About me</h1>
-                <p class="col-md-8 fs-4">
-                    Hi there! My name is Nikita. I'm 23 years old java developer from Moscow.
-                    Generally I code restful web services on java with spring framework, so I'm not good at web design :)
-                    <br/>
-                    Now I'm just learning to create projects with user interface, and I will be glad to see any feedback from you!
-                </p>
-                <p class="col-md-8 fs-4">
-                    Contact with me: nafilim29@mail.ru
-                </p>
-            </div>
-        </div>
-
-        <div class="row align-items-md-stretch">
-            <div class="col-md-6">
-                <div class="h-100 p-5 text-bg-dark rounded-3">
-                    <h2>My GitHub</h2>
-                    <p>Also I have public repository with little projects.
-                        Nothing special but a couple of stars can make me happy...</p>
-                    <form action="https://github.com/Casual-P">
-                        <button class="btn btn-outline-light"  type="submit">GitHub</button>
-                    </form>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="h-100 p-5 text-bg-dark border rounded-3">
-                    <h2>Leetcode</h2>
-                    <p>Sometimes I solve problems on this site...
-                        Join to me!
+    <main>
+        <div class="container py-3">
+            <div class="p-4 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-5">
+                    <h1 class="display-5 fw-bold">About me</h1>
+                    <p class="col-md-8 fs-4">
+                        Hi there! My name is Nikita. I'm 23 years old java developer from Moscow.
+                        Generally I code restful web services on java with spring framework, so I'm not good at web design :)
+                        <br/>
+                        Now I'm just learning to create projects with user interface, and I will be glad to see any feedback from you!
                     </p>
-                    <form action="https://leetcode.com/Nafilim/">
-                        <button class="btn btn-outline-light" type="submit">My Leetcode</button>
-                    </form>
+                    <p class="col-md-8 fs-4">
+                        Contact with me: nafilim29@mail.ru
+                    </p>
                 </div>
             </div>
-        </div>
 
-        <footer class="pt-3 mt-4 text-muted border-top">
-            © 2022
-        </footer>
-    </div>
-</main>
+            <div class="row align-items-md-stretch">
+                <div class="col-md-6">
+                    <div class="h-100 p-5 text-bg-dark rounded-3">
+                        <h2>My GitHub</h2>
+                        <p>Also I have public repository with little projects.
+                            Nothing special but a couple of stars can make me happy...</p>
+                        <form action="https://github.com/Casual-P">
+                            <button class="btn btn-outline-light"  type="submit">GitHub</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="h-100 p-5 text-bg-dark border rounded-3">
+                        <h2>Leetcode</h2>
+                        <p>Sometimes I solve problems on this site...
+                            Join to me!
+                        </p>
+                        <form action="https://leetcode.com/Nafilim/">
+                            <button class="btn btn-outline-light" type="submit">My Leetcode</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="pt-3 mt-4 text-muted border-top">
+                © 2022
+            </footer>
+        </div>
+    </main>
+<script src="/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -36,28 +36,30 @@
 /*}*/
 
 
-#comments {
-    width: 750px;
-    height: auto;
-    background-color: #ffffff;
-    border-width: 1px;
-    border-color: #ffffff;
-    border-style: solid;
-    border-radius: 5px;
-    margin: 10px auto;
-    padding: 5px 10px;
-}
+/*#comments {*/
+/*    width: 750px;*/
+/*    height: auto;*/
+/*    background-color: #ffffff;*/
+/*    border-width: 1px;*/
+/*    border-color: #ffffff;*/
+/*    border-style: solid;*/
+/*    border-radius: 5px;*/
+/*    margin: 10px auto;*/
+/*    padding: 5px 10px;*/
+/*}*/
 
 #main-body {
     background: #eaeaea;
 }
 
-#comment-form {
-    padding: 0 0;
-    width: 750px;
-    height: auto;
-    margin: 10px auto 50px;
-}
+/*#comment-form {*/
+/*    padding: 0 0;*/
+/*    width: 750px;*/
+/*    height: auto;*/
+/*    margin: 10px auto 50px;*/
+/*}*/
+
+
 
 #input-container{
     position: relative;

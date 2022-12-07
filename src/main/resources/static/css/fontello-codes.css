@@ -10,6 +10,9 @@
 .icon-ccw:before { content: '\e808'; } /* '' */
 .icon-cw:before { content: '\e809'; } /* '' */
 .icon-arrows-cw:before { content: '\e80a'; } /* '' */
+.icon-edit:before { content: '\e80b'; } /* '' */
+.icon-edit-1:before { content: '\e80c'; } /* '' */
+.icon-pencil:before { content: '\e80d'; } /* '' */
 .icon-facebook:before { content: '\f09a'; } /* '' */
 .icon-github-circled:before { content: '\f09b'; } /* '' */
 .icon-mail-alt:before { content: '\f0e0'; } /* '' */
@@ -17,6 +20,7 @@
 .icon-thumbs-down-alt:before { content: '\f165'; } /* '' */
 .icon-youtube-play:before { content: '\f16a'; } /* '' */
 .icon-moon:before { content: '\f186'; } /* '' */
+.icon-vkontakte:before { content: '\f189'; } /* '' */
 .icon-google:before { content: '\f1a0'; } /* '' */
 .icon-paper-plane:before { content: '\f1d8'; } /* '' */
 .icon-paper-plane-empty:before { content: '\f1d9'; } /* '' */

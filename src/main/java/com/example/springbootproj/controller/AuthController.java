@@ -22,12 +22,12 @@ public class AuthController {
     @PutMapping("/register")
     @ResponseStatus(HttpStatus.SEE_OTHER)
     public RedirectView registerUser(@ModelAttribute UserDto userDto){
-        log.info("{}", userDto.toString());
+        log.debug("{}", userDto.toString());
         try {
             userService.saveUser(userDto);
-            log.info("{}", "Saved new user");
+            log.debug("{}", "Saved new user");
         } catch (UserAlreadyExistException ex) {
-            log.info("{}", "Request user already exists");
+            log.debug("{}", "Request user already exists");
             return new RedirectView("http://localhost/api/auth/register?error");
         }
         return new RedirectView("http://localhost/api/auth/login");

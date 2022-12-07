@@ -2,9 +2,9 @@ package com.example.springbootproj.controller;
 
 import com.example.springbootproj.dto.CommentDto;
 import com.example.springbootproj.dto.UserDto;
-import com.example.springbootproj.exeption.UserAlreadyExistException;
 import com.example.springbootproj.service.PostService;
 import com.example.springbootproj.service.UserService;
+import com.example.springbootproj.service.NewsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -27,6 +27,8 @@ public class ViewController {
 
     private final UserService userService;
 
+    private final NewsService newsService;
+
     @GetMapping("/posts/{page}")
     @ResponseStatus(HttpStatus.OK)
     public String getPosts(@PathVariable int page, Model model) {
@@ -39,21 +41,22 @@ public class ViewController {
 
     @GetMapping("/main")
     @ResponseStatus(HttpStatus.OK)
-    public String main() {
+    public String main(Model model) {
+        model.addAttribute("news", newsService.getThreeRandomNews());
         return "main";
     }
 
     @GetMapping("/authentication")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> authorization(Authentication authentication) {
-        log.info("{}", authentication.toString());
+        log.debug("{}", authentication.toString());
         return ResponseEntity.ok(authentication);
     }
 
     @PutMapping("/posts")
     @ResponseStatus(HttpStatus.SEE_OTHER)
     public RedirectView savePost(@ModelAttribute CommentDto commentDto, Authentication authentication) {
-        log.info("{}", commentDto.toString());
+        log.debug("{}", commentDto.toString());
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("http://localhost/api/view/posts/0");
         UserDto curUser = userService.getAuthenticatedUser(authentication);
