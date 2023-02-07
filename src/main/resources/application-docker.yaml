@@ -2,9 +2,9 @@ server:
   port: 80
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/siteDB
-    username: postgres
-    password: 123
+      url: jdbc:postgresql://postgres:5432/siteDB
+      username: postgres
+      password: 123
   jpa:
     open-in-view: true
     hibernate:
@@ -19,11 +19,11 @@ spring:
   liquibase:
     enabled: true
     change-log: liquibase/changelog-master.xml
-    url: jdbc:postgresql://localhost:5432/siteDB
+    url: jdbc:postgresql://postgres:5432/siteDB
     user: postgres
     password: 123
     default-schema: custom_schema
-#    liquibase-schema: custom_schema
+  #    liquibase-schema: custom_schema
   mvc:
     hiddenmethod:
       filter:

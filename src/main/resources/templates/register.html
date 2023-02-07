@@ -25,19 +25,19 @@
                     </h3>
     
                     <div class="form-floating mb-3" id="my-form">
-                        <input type="email" class="form-control" id="emailInput" name="email" th:field="*{email}" placeholder="name@example.com">
+                        <input type="email" maxlength="256" class="form-control" id="emailInput" name="email" th:field="*{email}" placeholder="name@example.com">
                         <label for="emailInput" id="labelForEmail" style="color: #000000">Email address</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="usernameInput" name="username" th:field="*{username}" placeholder="name@example.com">
+                        <input type="text" maxlength="256" class="form-control" id="usernameInput" name="username" th:field="*{username}" placeholder="name@example.com">
                         <label for="usernameInput" style="color: #000000" id="usernameLabel">Username</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="passwordInput" name="password" th:field="*{password}" placeholder="Password">
+                        <input type="password" maxlength="256" class="form-control" id="passwordInput" name="password" th:field="*{password}" placeholder="Password">
                         <label for="passwordInput" id="passwordLabel" style="color: #000000">Password</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="repeatPasswordInput" name="repeatPassword" placeholder="Repeat Password">
+                        <input type="password" maxlength="256" class="form-control" id="repeatPasswordInput" name="repeatPassword" placeholder="Repeat Password">
                         <label for="repeatPasswordInput" id="repeatPasswordLabel" style="color: #000000">Repeat Password</label>
                     </div>
                     <div th:if="${param.error}" class="alert alert-danger">

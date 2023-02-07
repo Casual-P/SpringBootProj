@@ -1,5 +1,6 @@
 package com.example.springbootproj.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -19,7 +20,11 @@ public class CommentDto {
     @Size(min = 1, max = 355)
     private String text;
     private LocalDateTime date;
+    @ToString.Exclude
+    @JsonIgnore
     private UserDto fromUser;
+    @ToString.Exclude
+    @JsonIgnore
     private UserDto toUser;
 
     public String getFromUsername() {

@@ -28,6 +28,7 @@ public class YandexNewsParserService extends ParserService{
         Document yandexDoc = getYandexDoc(URL);
         if (yandexDoc != null) {
             newsList = getAllNews(yandexDoc);
+            System.out.println();
         }
     }
 
@@ -44,22 +45,23 @@ public class YandexNewsParserService extends ParserService{
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36")
                     .referrer("https://yandex.ru/")
                     .followRedirects(true)
-                    .cookie("_yasc", "eEQVTer6C1DHgL/c5WeM5kCsu9Kl0pFK+zrRAe62vEsYmq1fapbYub1DbWzoGOw=")
+                    .cookie("_yasc", "boB4B+csyuJOBsexSFi6Ltr79e/mA04olKMYU1kDBhFy3bIzs/+KDJiCSuc=")
+                    .cookie("zen_sso_checked", "1")
+                    .cookie("sso_status", "sso.passport.yandex.ru:synchronized")
                     .cookie("domain", ".dzen.ru")
                     .cookie("path", "/")
                     .cookie("expires", "Fri, 05-Nov-2032 16:25:12 GMT")
-                    .cookie("sso_checked", "1")
                     .cookie("yandex_login", "")
-                    .cookie("yandexuid", "1386727811667909476")
+                    .cookie("yandexuid", "1127325071674582777")
                     .cookie("vid", "01a05cca497c2ba4")
                     .cookie("tmr_lvid", "41ec10fecf2c97a199458e11faa7322a")
                     .cookie("tmr_lvidTS", "1667909477998")
                     .cookie("_ym_uid", "1667909478377551768")
                     .cookie("_ym_d", "1667909478")
                     .cookie("_ym_isad", "2")
-                    .cookie("Session_id", "noauth:1667917567")
-                    .cookie("ys", "c_chck.1005385571")
-                    .cookie("mda2_beacon", "1667917567113")
+                    .cookie("Session_id", "noauth:1674582777")
+                    .cookie("ys", "c_chck.2827640846")
+                    .cookie("mda2_beacon", "1674582777597")
                     .cookie("tmr_detect", "0%7C1667917571139")
                     .cookie("tmr_reqNum", "12")
                     .get();

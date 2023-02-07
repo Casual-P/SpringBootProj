@@ -39,6 +39,7 @@ public class NewsServiceImpl implements NewsService {
     private void collectNews() {
         currentNews = newsParsers.stream()
                 .map(ParserService::getNewsList)
+                .filter(Objects::nonNull)
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
     }

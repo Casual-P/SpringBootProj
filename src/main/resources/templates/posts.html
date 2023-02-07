@@ -13,7 +13,15 @@
 </head>
 
 <style>
+    .modal-title-id {
+        display: inline;
+    }
+
     .from-date {
+        display: inline;
+    }
+
+    .right-corner {
         display: inline;
     }
 
@@ -41,32 +49,67 @@
     }
 </style>
 
-<body id="main-body">
-    <script src="/js/bootstrap.bundle.min.js"></script>
-    <div th:include="navbar"></div>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/comment.js"></script>
+<script>
+    function auto_grow(textarea) {
+        textarea.style.height = '225px'
+        textarea.style.height = (textarea.scrollHeight)+"px";
+    }
 
+
+</script>
+<body id="main-body">
+    <div th:include="navbar"></div>
     <div class="container py-3" th:each="comment : ${comments}">
             <div class="p-1 bg-light rounded-3">
-                <div class="container-fluid" id="comments">
-                    <p th:text="${comment.getFromUsername()}" class="from-date" id="from"/>
-                    <p sec:authorize="hasRole('ADMIN')" th:text="${comment.getId()}" class="from-date" id="user-id"/>
-                    <button class="btn-close from-date ms-2" sec:authorize="hasRole('ADMIN')" style="float: right" type="submit" aria-label="Close"></button>
-                    <button class="from-date icon-pencil ms-2" sec:authorize="hasRole('ADMIN')" style="float: right" type="submit" id="btn-edit"></button>
-                    <p th:text="${#temporals.format(comment.getDate(), 'HH:mm:ss dd MMM yyyy')}" class="from-date" id="date"/>
-                    <p th:text="${comment.getText()}" id="text"/>
+                <div class="container-fluid" id="comments" style="word-wrap: break-word;">
+                    <p th:text="${comment.getFromUsername()}" class="from-date from-username" id="from"/>
+                    <p sec:authorize="hasRole('ADMIN')" th:text="${comment.getId()}" class="from-date user-id" id="user-id"/>
+                    <form class="right-corner" th:method="delete" th:action="@{/api/view/post/delete/{id}(id = ${comment.getId()})}" style="padding: 0">
+                        <button class="btn-close ms-2" sec:authorize="hasRole('ADMIN')" style="float: right" type="submit" aria-label="Close"></button>
+                    </form>
+                    <button class="from-date icon-pencil ms-2" data-bs-target="#modal" data-bs-toggle="modal" sec:authorize="hasRole('ADMIN')" style="float: right" type="submit" id="btn-edit" data-bs-pox="qqqqq"></button>
+                    <p th:text="${#temporals.format(comment.getDate(), 'HH:mm:ss dd MMM yyyy')}" class="right-corner date-time" id="date" style="margin-bottom: 0px"/>
+                    <p th:text="${comment.getText()}" class="user-text textarea-block" style="z-index: 99" id="text"/>
                 </div>
             </div>
     </div>
     <div class="container py-3">
         <form role="form" id="comment-form" th:method="put" th:action="@{/api/view/posts}" th:object="${comment}">
             <div class="form-floating pb-4" style="padding: 0 0">
-                <textarea class="form-control" th:field="*{text}" id="floatingTextarea2" style="height: 150px"></textarea>
+                <textarea class="form-control" maxlength="1000" th:field="*{text}" id="floatingTextarea2" style="height: 150px"></textarea>
                 <label for="floatingTextarea2">Leave a comment here</label>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="padding: 0 0">
-                <button class="btn btn-primary col-3" type="submit">Send</button>
+                <button class="btn btn-primary col-3" type="submit" id="btnSend">Send</button>
             </div>
         </form>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form class="p-0 w-100 h-100" th:method="patch" th:action="@{/api/view/post/edit}" th:object="${comment}">
+                <div class="modal-content" id="my-modal">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 modal-title-id me-2" id="modalLabel" th:field="${comment.fromUsername}">Name</h1>
+                        <input th:hidden="true" th:field="*{fromUsername}" id="modal-username-hidden">
+                        <h1 class="modal-title fs-5 modal-title-id" id="modalId" th:field="${comment.id}" style="opacity: 50%"></h1>
+                        <input th:hidden="true" th:field="*{id}" id="modal-id-hidden">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div style="height: auto">
+                            <textarea class="form-control textarea-block" maxlength="1000" id="edit-text-modal" th:field="${comment.text}" type="text" oninput="auto_grow(this)" style="height: 225px; width: 100%; overflow: auto; display: block"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>

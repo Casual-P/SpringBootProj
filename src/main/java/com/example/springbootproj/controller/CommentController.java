@@ -1,38 +1,53 @@
 package com.example.springbootproj.controller;
 
 import com.example.springbootproj.dto.CommentDto;
+import com.example.springbootproj.dto.UserDto;
 import com.example.springbootproj.service.PostService;
+import com.example.springbootproj.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Role;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/api/posts")
+@RestController
 public class CommentController {
 
     private final PostService postService;
 
+    private final UserService userService;
+
     @PutMapping("/new")
-    @PreAuthorize("hasRole('USER')")
-    public CommentDto createOne(@RequestBody CommentDto commentDto) {
+    public CommentDto createOne(@RequestBody CommentDto commentDto, Authentication authentication) {
+        UserDto curUser = userService.getAuthenticatedUser(authentication);
+        commentDto.setFromUser(curUser);
         return postService.savePost(commentDto);
     }
 
     @GetMapping("/page")
-    public List<CommentDto> getPage(@RequestParam int page, @RequestParam int size) {
-        return postService.getPageablePosts(PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "date"))).toList();
+    public List<CommentDto> getPage(@RequestParam int page) {
+        return postService.getPageablePosts(
+                PageRequest.of(page, 9999, Sort.by(Sort.Direction.ASC, "date"))
+        ).toList();
     }
 
-    @DeleteMapping("/delete")
-    @PreAuthorize("hasRole('ADMIN')")
-    public CommentDto deleteOne(@RequestBody Long id) {
+    @GetMapping("/test")
+    public List<?> getTest() {
+        return postService.getPageablePosts(Pageable.ofSize(999)).toList();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public CommentDto deleteOne(@PathVariable Long id, Authentication authentication) {
+        log.info("{}", authentication);
         return postService.deletePostById(id);
     }
 }
+
+

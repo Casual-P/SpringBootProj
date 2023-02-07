@@ -7,6 +7,7 @@ import com.example.springbootproj.security.oauth2.impl.CustomOauthTokenConverter
 import com.example.springbootproj.security.oauth2.impl.Oauth2LoginSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -60,6 +61,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
+                .csrf()
+                .and()
                 .oauth2Login()
                 .loginPage("/api/auth/login")
                 .permitAll()
@@ -70,6 +73,8 @@ public class SecurityConfig {
                 .accessTokenResponseClient(accessTokenResponseClient())
                 .and()
                 .defaultSuccessUrl("/api/view/main", false)
+                .and()
+                .httpBasic()
                 .and()
                 .formLogin()
                 .loginPage("/api/auth/login")
@@ -86,7 +91,7 @@ public class SecurityConfig {
                 .logoutUrl("/api/auth/logout")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/view/main", "/api/view/about",
+                .mvcMatchers("/api/view/main", "/api/view/about",
                         "/css/**", "/js/**", "/images/**", "/font/**",
                         "/oauth2/**", "/api/auth/**")
                 .permitAll()

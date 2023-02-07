@@ -37,7 +37,7 @@ public class User {
     @Column(name = "oauth_provider")
     private String auth_provider;
     private String userOauthId;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "fromUser")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "toUser")
     @ToString.Exclude
     private List<Comment> comments;
 }

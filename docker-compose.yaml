@@ -7,7 +7,7 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/create_schema.sql
       - .:/var/lib/postgresql/data
     container_name: spring-app-postgres-14
-    restart: always
+    restart: on-failure
     environment:
       - 'POSTGRES_USER=postgres'
       - 'POSTGRES_PASSWORD=123'
@@ -15,7 +15,10 @@ services:
       - 'PGDATA=/var/lib/postgresql/data/pgdata'
   spring-app:
     build: ./
+    image: nafilim/spring-app:v2.7
     container_name: 'spring-app'
+    environment:
+      - 'SPRING_PROFILES_ACTIVE=docker'
     depends_on:
       - postgres
 #      - keycloak

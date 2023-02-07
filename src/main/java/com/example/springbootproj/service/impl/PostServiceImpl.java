@@ -42,8 +42,13 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public CommentDto deletePostById(Long id) {
-        Comment comment = postRepository.findById(id).orElseThrow();
-        postRepository.delete(comment);
+        Comment comment = null;
+        try {
+            comment = postRepository.findById(id).orElseThrow();
+            postRepository.deleteById(id);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return mapper.postToPostDto(comment);
     }
 
@@ -61,7 +66,7 @@ public class PostServiceImpl implements PostService {
     public CommentDto updatePost(CommentDto commentDto) {
         Comment comment = postRepository.findById(commentDto.getId()).orElseThrow();
         comment.setText(commentDto.getText());
-        comment.setDate(LocalDateTime.now());
+//        comment.setDate(LocalDateTime.now());
         postRepository.save(comment);
         return mapper.postToPostDto(comment);
     }

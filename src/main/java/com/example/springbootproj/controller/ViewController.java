@@ -15,7 +15,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.servlet.view.RedirectView;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -57,8 +59,9 @@ public class ViewController {
     @ResponseStatus(HttpStatus.SEE_OTHER)
     public RedirectView savePost(@ModelAttribute CommentDto commentDto, Authentication authentication) {
         log.debug("{}", commentDto.toString());
+        String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("http://localhost/api/view/posts/0");
+        redirectView.setUrl(baseUrl + "/api/view/posts/0");
         UserDto curUser = userService.getAuthenticatedUser(authentication);
         commentDto.setFromUser(curUser);
         postService.savePost(commentDto);
@@ -69,5 +72,28 @@ public class ViewController {
     @ResponseStatus(HttpStatus.OK)
     public String getLinks() {
         return "about";
+    }
+
+    @DeleteMapping("/post/delete/{id}")
+    @ResponseStatus(HttpStatus.SEE_OTHER)
+    public RedirectView deletePostById(@PathVariable Long id) {
+        log.info("Delete comment by id = {}", id);
+        String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl(baseUrl + "/api/view/posts/0");
+        CommentDto commentDto = postService.deletePostById(id);
+        log.info("Deleted comment: {}", commentDto);
+        return redirectView;
+    }
+
+    @PatchMapping("/post/edit")
+    @ResponseStatus(HttpStatus.SEE_OTHER)
+    public RedirectView editPost(@ModelAttribute CommentDto commentDto) {
+        RedirectView redirectView = new RedirectView();
+        String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+        redirectView.setUrl(baseUrl + "/api/view/posts/0");
+        postService.updatePost(commentDto);
+        log.info("Deleted comment: {}", commentDto);
+        return redirectView;
     }
 }

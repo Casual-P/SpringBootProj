@@ -31,8 +31,8 @@ public class SwaggerConfig {
     @Bean
     public Contact swaggerContact() {
         return new Contact()
-                .name("Nikita")
-                .email("casualenjoyer@mail.ru")
+                .name("Anon")
+                .email("nafilim29@mail.ru")
                 .url("https://github.com/Casual-P");
     }
 
