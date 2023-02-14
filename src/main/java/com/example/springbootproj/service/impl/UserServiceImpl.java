@@ -5,6 +5,7 @@ import com.example.springbootproj.dto.UserDto;
 import com.example.springbootproj.entity.Role;
 import com.example.springbootproj.entity.User;
 import com.example.springbootproj.exeption.UserAlreadyExistException;
+import com.example.springbootproj.exeption.UserNotFoundException;
 import com.example.springbootproj.mapper.UserMapper;
 import com.example.springbootproj.repository.UserRepository;
 import com.example.springbootproj.security.CustomUserDetails;
@@ -15,16 +16,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService {
         try {
             getUserByEmail(userDto.getEmail());
             throw new UserAlreadyExistException();
-        } catch (NoSuchElementException e) {
+        } catch (UserNotFoundException e) {
             User user = userMapper.userDtoToUser(userDto);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setRoles(Collections.singleton(new Role(Roles.USER)));
@@ -49,42 +50,48 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto deleteUserByUsername(String userName) {
-        return userMapper.userToUserDto(userRepository.deleteUserByUsername(userName).orElseThrow());
+        UserDto deletedUser = userMapper.userToUserDto(userRepository.findByUsername(userName).orElseThrow(UserNotFoundException::new));
+        userRepository.deleteUserByUsername(userName);
+        return deletedUser;
     }
 
     @Override
     public UserDto deleteUserByEmail(String email) {
-        return userMapper.userToUserDto(userRepository.deleteByEmail(email).orElseThrow());
+        UserDto deletedUser = userMapper.userToUserDto(userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new));
+        userRepository.deleteUserByEmail(email);
+        return deletedUser;
     }
 
     @Override
     public UserDto deleteUserById(Long id) {
-        return userMapper.userToUserDto(userRepository.findById(id).orElseThrow());
+        return userMapper.userToUserDto(userRepository.findById(id).orElseThrow(UserNotFoundException::new));
     }
 
     @Override
     public UserDto getUserByUsername(String username) {
-        return userMapper.userToUserDto(userRepository.findByUsername(username).orElseThrow());
+        return userMapper.userToUserDto(userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new));
     }
 
     @Override
     public UserDto getUserByEmail(String eMail) {
-        return userMapper.userToUserDto(userRepository.findByEmail(eMail).orElseThrow());
+        return userMapper.userToUserDto(userRepository.findByEmail(eMail).orElseThrow(UserNotFoundException::new));
     }
 
     @Override
     public UserDto getUserById(Long id) {
-        return userMapper.userToUserDto(userRepository.findById(id).orElseThrow());
+        return userMapper.userToUserDto(userRepository.findById(id).orElseThrow(UserNotFoundException::new));
     }
 
     @Override
     public UserDto updateUser(UserDto userDto) {
-        User updatedUser = userMapper.userDtoToUser(userDto);
-        User currentUser = userRepository.findById(updatedUser.getId()).orElseThrow();
-        if(!updatedUser.getPassword().equals(currentUser.getPassword()))
-            updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
-        updatedUser.setId(currentUser.getId());
-        return userMapper.userToUserDto(userRepository.save(updatedUser));
+        User currentUser = userRepository.findById(userDto.getId()).orElseThrow(UserNotFoundException::new);
+        if(!userDto.getPassword().equals(currentUser.getPassword()))
+            currentUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        currentUser.setUsername(userDto.getUsername());
+        currentUser.setEmail(userDto.getEmail());
+        currentUser.setRoles(userDto.getRoles());
+        currentUser.setIsBanned(userDto.getIsBanned());
+        return userMapper.userToUserDto(currentUser);
     }
 
 
