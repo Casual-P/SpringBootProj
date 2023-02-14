@@ -22,6 +22,7 @@ import java.util.Set;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({"id", "name"})
+@Builder
 public class UserDto {
     private Long id;
     @Size(min = 5, max = 50, message = "Username should contains more then 5 characters")
