@@ -28,7 +28,6 @@ public class YandexNewsParserService extends ParserService{
         Document yandexDoc = getYandexDoc(URL);
         if (yandexDoc != null) {
             newsList = getAllNews(yandexDoc);
-            System.out.println();
         }
     }
 
