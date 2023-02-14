@@ -2,7 +2,7 @@ package com.example.springbootproj.microservice.endpoint;
 
 import com.example.springbootproj.dto.UserDto;
 import com.example.springbootproj.entity.User;
-import com.example.springbootproj.exeption.UserNotFoundException;
+import com.example.springbootproj.exception.UserNotFoundException;
 import com.example.springbootproj.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;

@@ -1,8 +1,7 @@
 package com.example.springbootproj.controller;
 
 import com.example.springbootproj.dto.UserDto;
-import com.example.springbootproj.exeption.UserAlreadyExistException;
-import com.example.springbootproj.service.PostService;
+import com.example.springbootproj.exception.UserAlreadyExistException;
 import com.example.springbootproj.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

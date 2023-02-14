@@ -1,6 +1,6 @@
 package com.example.springbootproj.security.oauth2.impl;
 
-import com.example.springbootproj.exeption.CustomAccessDeniedException;
+import com.example.springbootproj.exception.CustomAccessDeniedException;
 import com.example.springbootproj.security.oauth2.OauthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;

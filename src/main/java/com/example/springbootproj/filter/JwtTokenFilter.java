@@ -1,6 +1,6 @@
 package com.example.springbootproj.filter;
 
-import com.example.springbootproj.exeption.CustomJwtAuthException;
+import com.example.springbootproj.exception.CustomJwtAuthException;
 import com.example.springbootproj.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
