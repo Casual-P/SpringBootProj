@@ -1,6 +1,6 @@
 package com.example.springbootproj.security.jwt;
 
-import com.example.springbootproj.exeption.CustomJwtAuthException;
+import com.example.springbootproj.exception.CustomJwtAuthException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;

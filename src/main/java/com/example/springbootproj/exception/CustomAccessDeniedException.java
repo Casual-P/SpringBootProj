@@ -1,4 +1,4 @@
-package com.example.springbootproj.exeption;
+package com.example.springbootproj.exception;
 
 public class CustomAccessDeniedException extends CustomAuthenticationException {
 
