@@ -9,9 +9,9 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> deleteUserByUsername(String username);
+    int deleteUserByUsername(String username);
 
-    Optional<User> deleteByEmail(String eMail);
+    int deleteUserByEmail(String email);
 
     @EntityGraph("FetchRoles")
     Optional<User> findByUsername(String username);
@@ -19,7 +19,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @EntityGraph("FetchRoles")
     Optional<User> findByEmail(String email);
 
-    Optional<User> deleteByUserOauthId(String userOauthId);
+    int deleteByUserOauthId(String userOauthId);
 
     @EntityGraph("FetchRoles")
     Optional<User> findByUserOauthId(String userOauthId);
