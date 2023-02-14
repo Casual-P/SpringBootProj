@@ -69,8 +69,8 @@
                     <form class="right-corner" th:method="delete" th:action="@{/api/view/post/delete/{id}(id = ${comment.getId()})}" style="padding: 0">
                         <button class="btn-close ms-2" sec:authorize="hasRole('ADMIN')" style="float: right" type="submit" aria-label="Close"></button>
                     </form>
-                    <button class="from-date icon-pencil ms-2" data-bs-target="#modal" data-bs-toggle="modal" sec:authorize="hasRole('ADMIN')" style="float: right" type="submit" id="btn-edit" data-bs-pox="qqqqq"></button>
-                    <p th:text="${#temporals.format(comment.getDate(), 'HH:mm:ss dd MMM yyyy')}" class="right-corner date-time" id="date" style="margin-bottom: 0px"/>
+                    <button class="from-date icon-pencil ms-2" data-bs-target="#modal" data-bs-toggle="modal" sec:authorize="hasRole('ADMIN')" style="float: right" type="submit" id="btn-edit"></button>
+                    <p th:text="${#temporals.format(comment.getDate(), 'HH:mm:ss dd MMM yyyy')}" class="right-corner date-time" id="date" style="margin-bottom: 0"/>
                     <p th:text="${comment.getText()}" class="user-text textarea-block" style="z-index: 99" id="text"/>
                 </div>
             </div>

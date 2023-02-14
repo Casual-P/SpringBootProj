@@ -26,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .roles(user.getRoles().stream().map(Role::getId).map(Enum::name).toArray(String[]::new))
-                .disabled(user.isBanned())
+                .disabled(user.getIsBanned())
                 .build();
     }
 }

@@ -3,6 +3,7 @@ package com.example.springbootproj.security.oauth2.impl;
 import com.example.springbootproj.component.Roles;
 import com.example.springbootproj.entity.Role;
 import com.example.springbootproj.entity.User;
+import com.example.springbootproj.exeption.UserNotFoundException;
 import com.example.springbootproj.repository.UserRepository;
 import com.example.springbootproj.security.oauth2.OauthService;
 import lombok.RequiredArgsConstructor;
@@ -49,13 +50,15 @@ public class OauthServiceImpl implements OauthService {
     @Override
     public User delete(CustomOauth2UserDetails oAuth2User) {
         User curUser = convert(oAuth2User);
-        return userRepository.deleteByUserOauthId(curUser.getUserOauthId()).orElseThrow();
+        User user = userRepository.findByUserOauthId(curUser.getUserOauthId()).orElseThrow(UserNotFoundException::new);
+        userRepository.deleteByUserOauthId(curUser.getUserOauthId());
+        return user;
     }
 
     @Override
     public User find(CustomOauth2UserDetails oAuth2User) {
         User user = userRepository.findByUserOauthId(oAuth2User.getUserOauthId()).orElseThrow();
-        oAuth2User.setBanned(user.isBanned());
+        oAuth2User.setBanned(user.getIsBanned());
         return user;
     }
 }
