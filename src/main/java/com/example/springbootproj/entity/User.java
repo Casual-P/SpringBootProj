@@ -33,7 +33,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     @ToString.Exclude
     private Set<Role> roles;
-    private boolean isBanned;
+    private Boolean isBanned;
     @Column(name = "oauth_provider")
     private String auth_provider;
     private String userOauthId;
