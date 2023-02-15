@@ -23,7 +23,7 @@ spring:
     user: postgres
     password: 123
     default-schema: custom_schema
-#    liquibase-schema: custom_schema
+    contexts: prod
   mvc:
     hiddenmethod:
       filter:

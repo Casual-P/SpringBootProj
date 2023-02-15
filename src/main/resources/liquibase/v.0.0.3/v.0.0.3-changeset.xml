@@ -1,0 +1,48 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="create-tables" author="Casual_P" context="prod">
+        <insert tableName="roles">
+            <column name="id">USER</column>
+        </insert>
+
+        <insert tableName="roles">
+        <column name="id">ADMIN</column>
+        </insert>
+
+        <insert tableName="roles">
+        <column name="id">BANNED</column>
+        </insert>
+
+        <insert tableName="users">
+        <column name="email">admin@admin.com</column>
+        <column name="username">admin</column>
+        <column name="password">$2y$10$nlaO0.g7QKANKUQQyyufYO0xyxltUalX9TX/OL8kB3GRT2OzDBaJS</column>
+        </insert>
+
+        <insert tableName="users">
+        <column name="username">banned</column>
+        <column name="password">$2y$10$4MO.TqAsFli.DVxjj0IZW.EGpE/ndhUNj7W3aR3w2ZkrhqvcMcCaK</column>
+        <column name="email">ban@ban.ban</column>
+        <column name="is_banned">true</column>
+        </insert>
+
+        <insert tableName="user_role">
+        <column name="user_id">1</column>
+        <column name="role_id">USER</column>
+        </insert>
+
+        <insert tableName="user_role">
+        <column name="user_id">1</column>
+        <column name="role_id">ADMIN</column>
+        </insert>
+
+        <insert tableName="user_role">
+        <column name="user_id">2</column>
+        <column name="role_id">BANNED</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

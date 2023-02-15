@@ -5,7 +5,10 @@ spring:
     properties:
       hibernate:
         default_schema: custom_schema
+        show_sql: true
+        format_sql: true
   liquibase:
     enabled: true
     default-schema: custom_schema
     liquibase-schema: custom_schema
+    contexts: test
