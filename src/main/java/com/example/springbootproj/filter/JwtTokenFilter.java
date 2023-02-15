@@ -50,7 +50,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        log.info("{}", request.getRequestURI());
+        log.debug("{}", request.getRequestURI());
         return true;
     }
 }
