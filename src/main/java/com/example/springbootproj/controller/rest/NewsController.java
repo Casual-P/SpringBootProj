@@ -1,4 +1,4 @@
-package com.example.springbootproj.controller;
+package com.example.springbootproj.controller.rest;
 
 import com.example.springbootproj.entity.News;
 import com.example.springbootproj.service.NewsService;
