@@ -1,4 +1,4 @@
-package com.example.springbootproj.controller;
+package com.example.springbootproj.controller.rest;
 
 import com.example.springbootproj.dto.UserDto;
 import com.example.springbootproj.service.UserService;
