@@ -61,7 +61,7 @@
 </script>
 <body id="main-body">
     <div th:include="navbar"></div>
-    <div class="container py-3" th:each="comment : ${comments}">
+    <div class="container py-3 position-relative" th:each="comment : ${comments}">
             <div class="p-1 bg-light rounded-3">
                 <div class="container-fluid" id="comments" style="word-wrap: break-word;">
                     <p th:text="${comment.getFromUsername()}" class="from-date from-username" id="from"/>
