@@ -1,6 +1,17 @@
 version: '3'
 
 services:
+  spring-app:
+    build: ./
+    image: nafilim/spring-app:v2.7
+    container_name: 'spring-app'
+    environment:
+      - 'SPRING_PROFILES_ACTIVE=docker'
+    depends_on:
+      - postgres
+#      - keycloak
+    ports:
+      - "80:80"
   postgres:
     image: postgres:14-alpine
     volumes:
@@ -13,17 +24,6 @@ services:
       - 'POSTGRES_PASSWORD=123'
       - 'POSTGRES_DB=siteDB'
       - 'PGDATA=/var/lib/postgresql/data/pgdata'
-  spring-app:
-    build: ./
-    image: nafilim/spring-app:v2.7
-    container_name: 'spring-app'
-    environment:
-      - 'SPRING_PROFILES_ACTIVE=docker'
-    depends_on:
-      - postgres
-#      - keycloak
-    ports:
-      - "80:80"
 #  keycloak:
 #    image: keycloak/keycloak:latest
 #    environment:
