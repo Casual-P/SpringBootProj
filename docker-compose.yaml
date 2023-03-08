@@ -24,6 +24,15 @@ services:
       - 'POSTGRES_PASSWORD=123'
       - 'POSTGRES_DB=siteDB'
       - 'PGDATA=/var/lib/postgresql/data/pgdata'
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis-data:/data
+      - ./configs/redis-conf:/usr/local/etc/redis/redis.conf
 #  keycloak:
 #    image: keycloak/keycloak:latest
 #    environment:
@@ -34,3 +43,4 @@ services:
 #    command: ["start-dev", "--http-port=8443"]
 #    ports:
 #      - "8443:8443"
+
