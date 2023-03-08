@@ -24,6 +24,11 @@ spring:
     password: 123
     default-schema: custom_schema
     contexts: prod
+  redis:
+    host: redis
+    port: 6379
+  session:
+    store-type: redis
   mvc:
     hiddenmethod:
       filter:
