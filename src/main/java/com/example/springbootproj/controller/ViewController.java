@@ -34,6 +34,7 @@ public class ViewController {
     @GetMapping("/posts/{page}")
     @ResponseStatus(HttpStatus.OK)
     public String getPosts(@PathVariable int page, Model model) {
+        log.info("Get comments pageable. page: {}", page);
         model.addAttribute("comments", postService.getPageablePosts(
                 PageRequest.of(page, 9999, Sort.by(Sort.Direction.ASC, "date"))
         ).toList());
