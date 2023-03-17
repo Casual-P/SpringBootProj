@@ -9,7 +9,6 @@ services:
       - 'SPRING_PROFILES_ACTIVE=docker'
     depends_on:
       - postgres
-#      - keycloak
     ports:
       - "80:80"
   postgres:
@@ -33,6 +32,12 @@ services:
     volumes:
       - ./redis-data:/data
       - ./configs/redis-conf:/usr/local/etc/redis/redis.conf
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    restart: unless-stopped
 #  keycloak:
 #    image: keycloak/keycloak:latest
 #    environment:
