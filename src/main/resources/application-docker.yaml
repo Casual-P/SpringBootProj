@@ -1,6 +1,13 @@
 server:
   port: 80
 spring:
+  application:
+    name: SpringApp
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://zipkin:9411/
   datasource:
       url: jdbc:postgresql://postgres:5432/siteDB
       username: postgres
