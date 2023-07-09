@@ -2,12 +2,12 @@ server:
   port: 80
 spring:
   application:
-    name: SpringApp
-  sleuth:
-    sampler:
-      probability: 1.0
-  zipkin:
-    base-url: http://localhost:9411/
+    name: Forum
+#  sleuth:
+#    sampler:
+#      probability: 1.0
+#  zipkin:
+#    base-url: http://localhost:9411/
   datasource:
     url: jdbc:postgresql://localhost:5432/siteDB
     username: postgres
@@ -35,11 +35,11 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-  redis:
-    host: localhost
-    port: 6379
-  session:
-    store-type: redis
+#  redis:
+#    host: localhost
+#    port: 6379
+#  session:
+#    store-type: redis
   security:
     oauth2:
       client:
